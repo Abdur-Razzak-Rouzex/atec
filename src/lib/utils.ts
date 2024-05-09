@@ -18,7 +18,7 @@ export const defaultSession: SessionData = {
 };
 
 export const sessionOptions: SessionOptions = {
-  password: process.env.SESSION_SECRET_KEY!,
+  password: process.env.SESSION_SECRET_KEY! || "CXkzxcv568123i6UV5Z/YAuoAsdf3bw1z3eqcdBjlp;[oiuPAC37WjMvmAkWY=",
   cookieName: "session",
   cookieOptions: {
     httpOnly: true,
