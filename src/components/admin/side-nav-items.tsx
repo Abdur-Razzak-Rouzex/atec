@@ -57,6 +57,11 @@ export const SIDENAV_ITEMS: SideNavItemGroup[] = [
         path: "/dashboard/help",
         icon: <BsQuestionCircle size={20} />,
       },
+      {
+        title: "Payments",
+        path: "/dashboard/payment",
+        icon: <BsQuestionCircle size={20} />,
+      },
     ],
   },
 ];

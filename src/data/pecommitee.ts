@@ -1,6 +1,6 @@
 import { ExecutiveType } from "@/types";
 
-export const pecomittee: ExecutiveType[] = [
+export const PEComittee: ExecutiveType[] = [
   {
     id: "1",
     name: "Name : Nurshad",

@@ -13,38 +13,6 @@ export interface NavItem {
   disabled?: boolean;
 }
 
-// types.ts (Type Definition)
-export interface UserData {
-  cadetNo: string;
-  confirmPassword: string;
-  email: string;
-}
-
-// types.ts
-export interface UserData {
-  cadetNo: string;
-  confirmPassword: string;
-}
-
-export interface FrequentlyAskedQuestion {
-  question: string;
-  answer: string;
-}
-
-export interface Feature {
-  title: string;
-  description: string;
-  image: string;
-}
-
-export interface Testimonial {
-  title: string;
-  body: string;
-  name: string;
-  role: string;
-  avatar: string;
-}
-
 export interface EventType {
   id: string;
   title: string;
@@ -54,7 +22,6 @@ export interface EventType {
   location: string;
   image: string;
 }
-// types.ts
 export interface ExecutiveType {
   id: string;
   name: string;
@@ -95,13 +62,6 @@ export type SideNavItemGroup = {
   menuList: SideNavItem[];
 };
 
-export interface EventContactType {
-  name: string;
-  designation: string;
-  phone: 0;
-  img: string;
-}
-
 export interface InputType {
   email?: string;
 }
@@ -110,3 +70,10 @@ export interface CollegeType {
   title: string;
   value: string;
 }
+
+type Payment = {
+  id: string;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+};
