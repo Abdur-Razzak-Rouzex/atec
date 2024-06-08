@@ -30,9 +30,5 @@ export const siteConfig = {
       title: "Events",
       href: "/events",
     },
-    // {
-    //   title: "PresentExecutive",
-    //   href: "/presentexecutive",
-    // },
   ] satisfies NavItem[],
 };

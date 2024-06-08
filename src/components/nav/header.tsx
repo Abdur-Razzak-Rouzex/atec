@@ -14,11 +14,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutForm from "./logout-form";
+import { siteConfig } from "@/data/site";
 
 export async function Header(): Promise<JSX.Element> {
   const session = await getSession();

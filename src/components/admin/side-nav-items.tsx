@@ -23,13 +23,13 @@ export const SIDENAV_ITEMS: SideNavItemGroup[] = [
     title: "Manage",
     menuList: [
       {
-        title: "Device",
-        path: "/dashboard/device",
+        title: "Colleges",
+        path: "/dashboard/colleges",
         icon: <BsKanban size={20} />,
         submenu: true,
         subMenuItems: [
-          { title: "All", path: "/dashboard/products" },
-          { title: "New", path: "/dashboard/products/new" },
+          { title: "Colleges", path: "/dashboard/colleges" },
+          { title: "Houses", path: "/dashboard/houses" },
         ],
       },
       {
@@ -55,17 +55,6 @@ export const SIDENAV_ITEMS: SideNavItemGroup[] = [
       {
         title: "Help",
         path: "/dashboard/help",
-        icon: <BsQuestionCircle size={20} />,
-      },
-      {
-        title: "Posts",
-        path: "/dashboard/post",
-        icon: <BsQuestionCircle size={20} />,
-      },
-
-      {
-        title: "Users",
-        path: "/dashboard/user",
         icon: <BsQuestionCircle size={20} />,
       },
     ],

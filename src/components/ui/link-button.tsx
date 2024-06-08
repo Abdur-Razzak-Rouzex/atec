@@ -9,24 +9,35 @@ type LinkButtonPropTypes = {
   size?: "default" | "sm" | "lg" | "icon";
   link?: string;
   icon?: JSX.Element;
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | "navbarIcon"
+    | "user";
 };
 
 const LinkButton = ({
   title,
   size = "lg",
   link = "/register",
+  icon = <ArrowRightIcon className="ml-3" />,
+  variant = "default",
 }: LinkButtonPropTypes) => {
   return (
     <div className="animate-fade-up">
       <Link
         href={link}
         className={cn(
-          buttonVariants({ size: size }),
+          buttonVariants({ size: size, variant: variant }),
           "transition-all duration-1000 ease-out md:hover:-translate-y-2"
         )}
       >
         {title}
-        <ArrowRightIcon className="ml-3" />
+        {icon}
       </Link>
     </div>
   );

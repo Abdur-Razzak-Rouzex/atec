@@ -1,9 +1,7 @@
 "use client";
 
-import { Post } from "@/types";
-import { User } from "lucide-react";
-import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,8 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Post } from "@/types";
+import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "./data-table";
 
 export const columns: ColumnDef<Post>[] = [
@@ -71,8 +70,6 @@ export const columns: ColumnDef<Post>[] = [
     header: () => <div className="text-right">Action</div>,
     cell: ({ row }) => {
       const post = row.original;
-
-      
 
       return (
         <div className="text-right">
