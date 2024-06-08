@@ -5,9 +5,9 @@ import { useSideBarToggle } from "@/hooks/use-sidebar-toogle";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
-type AdminPageWrapperPropType = {
+interface AdminPageWrapperPropType {
   children: React.ReactNode;
-};
+}
 
 const AdminPageWrapper = ({ children }: AdminPageWrapperPropType) => {
   const { toggleCollapse, invokeToggleCollapse } = useSideBarToggle();
