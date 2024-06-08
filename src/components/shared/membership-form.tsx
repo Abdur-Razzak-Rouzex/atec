@@ -70,7 +70,7 @@ export function MembershipForm() {
     resolver: zodResolver(MembershipFromSchema),
 
     defaultValues: {
-      username: "",
+      fullName: "",
       fathersName: "",
       mothersName: "",
       email: "",
@@ -92,7 +92,7 @@ export function MembershipForm() {
       membershipCategory: "",
       calender: new Date(),
       passOutYear: "",
-      mobile: false,
+      isAgreedToTerms: false,
     },
   });
   async function onSubmit(
@@ -101,7 +101,7 @@ export function MembershipForm() {
     startTransition(async () => {
       try {
         const message = await RegisterMembership({
-          username: FormData.username,
+          username: FormData.fullName,
           email: FormData.email,
           phoneNumber: FormData.phoneNumber,
           translationId: FormData.translationId,
@@ -123,7 +123,7 @@ export function MembershipForm() {
           membershipCategory: FormData.membershipCategory,
           calender: FormData.calender,
           passOutYear: FormData.passOutYear,
-          mobile: FormData.mobile,
+          mobile: FormData.isAgreedToTerms,
         });
 
         console.log("the submit message: ", message);
@@ -145,11 +145,11 @@ export function MembershipForm() {
               <div className="mb-4 mt-8">
                 <FormField
                   control={form.control}
-                  name="username"
+                  name="fullName"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Your Full Name" {...field} />
+                        <Input placeholder="Your Full Name *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -168,7 +168,7 @@ export function MembershipForm() {
                       >
                         <FormControl>
                           <SelectTrigger className="text-slate-400">
-                            <SelectValue placeholder="Select collage name" />
+                            <SelectValue placeholder="Select collage name *" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -202,7 +202,7 @@ export function MembershipForm() {
                       >
                         <FormControl>
                           <SelectTrigger className="text-slate-400">
-                            <SelectValue placeholder="Select Membership Category" />
+                            <SelectValue placeholder="Select Membership Category *" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -245,7 +245,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Father's Name" {...field} />
+                        <Input placeholder="Father's Name *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -259,7 +259,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Mother's Name" {...field} />
+                        <Input placeholder="Mother's Name *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -273,7 +273,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Present Address" {...field} />
+                        <Input placeholder="Present Address *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -287,49 +287,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Permanent Address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="mb-4">
-                <FormField
-                  control={form.control}
-                  name="workAddress"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Work Address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="mb-4">
-                <FormField
-                  control={form.control}
-                  name="designation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Designation" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="mb-4">
-                <FormField
-                  control={form.control}
-                  name="organization"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Organization" {...field} />
+                        <Input placeholder="Permanent Address *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -343,7 +301,49 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Profession" {...field} />
+                        <Input placeholder="Profession *" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-4">
+                <FormField
+                  control={form.control}
+                  name="designation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Designation *" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-4">
+                <FormField
+                  control={form.control}
+                  name="organization"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Organization *" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-4">
+                <FormField
+                  control={form.control}
+                  name="workAddress"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Work Address *" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -359,7 +359,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Phone Number" {...field} />
+                        <Input placeholder="Phone Number *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -416,7 +416,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="johnsmith@gmail.com" {...field} />
+                        <Input placeholder="Email *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -430,7 +430,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Batch" {...field} />
+                        <Input placeholder="College Intake *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -444,7 +444,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="House" {...field} />
+                        <Input placeholder="House *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -458,7 +458,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Cadet No" {...field} />
+                        <Input placeholder="Cadet No *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -472,7 +472,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Translation ID" {...field} />
+                        <Input placeholder="Translation ID *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -486,7 +486,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="National ID" {...field} />
+                        <Input placeholder="National ID *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -500,7 +500,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Blood Group" {...field} />
+                        <Input placeholder="Blood Group *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -514,7 +514,7 @@ export function MembershipForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Cadet Name" {...field} />
+                        <Input placeholder="Cadet Name *" {...field} />
                       </FormControl>
                       <FormMessage className="pt-2 sm:text-sm" />
                     </FormItem>
@@ -529,7 +529,7 @@ export function MembershipForm() {
                     <FormItem>
                       <FormControl>
                         <Input
-                          placeholder="Pass Out Year"
+                          placeholder="Pass Out Year *"
                           {...field}
                           type="number"
                         />
@@ -542,7 +542,7 @@ export function MembershipForm() {
               <div className="mb-4">
                 <FormField
                   control={form.control}
-                  name="mobile"
+                  name="isAgreedToTerms"
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                       <FormControl>
