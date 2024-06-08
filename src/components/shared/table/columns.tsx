@@ -1,6 +1,7 @@
 "use client";
 
-import { Payment } from "@/types";
+import { Post } from "@/types";
+import { User } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,11 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "./data-table";
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Post>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -39,47 +40,39 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "userId",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
+      <DataTableColumnHeader column={column} title="UserId" />
     ),
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    accessorKey: "status",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Status" />
+    ),
   },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
+  {
+    accessorKey: "title",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Title" />
+    ),
   },
+
+  {
+    accessorKey: "publishedAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="PublishedAt" />
+    ),
+  },
+
   {
     id: "actions",
     header: () => <div className="text-right">Action</div>,
     cell: ({ row }) => {
-      const payment = row.original;
+      const post = row.original;
+
+      
 
       return (
         <div className="text-right">
@@ -93,13 +86,13 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
+                onClick={() => navigator.clipboard.writeText(post.id)}
               >
-                Copy payment ID
+                Copy post
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>View customer</DropdownMenuItem>
-              <DropdownMenuItem>View payment details</DropdownMenuItem>
+              <DropdownMenuItem>View post</DropdownMenuItem>
+              <DropdownMenuItem>View post details</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

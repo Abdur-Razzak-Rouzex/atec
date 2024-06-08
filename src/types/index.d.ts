@@ -71,13 +71,21 @@ export interface CollegeType {
   value: string;
 }
 
-type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
+type User = {
+  id: 1;
+  firstname: string;
+  lastname: string;
   email: string;
+  birthDate: number;
 };
 
-
-
-
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  status: string;
+  category: string;
+  updatedAt: 1;
+  userId: string;
+};
