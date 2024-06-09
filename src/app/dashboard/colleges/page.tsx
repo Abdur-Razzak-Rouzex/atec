@@ -1,9 +1,11 @@
 "use client";
 
+import { AddOrEditCollege, GetAllColleges } from "@/actions/college.actions";
+import { Icons } from "@/components/icons";
 import SubHeading from "@/components/shared/sub-heading";
+import { columns } from "@/components/shared/table/columns";
+import { DataTable } from "@/components/shared/table/data-table";
 import { Button } from "@/components/ui/button";
-import { BsFillPlusCircleFill } from "react-icons/bs";
-import { z } from "zod";
 import {
   Dialog,
   DialogClose,
@@ -13,16 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { collegeFormSchema } from "@/validations/collge";
-import { AddOrEditCollege } from "@/actions/college.actions";
-import { showToast } from "@/lib/toast";
-import { useTheme } from "next-themes";
-import { Icons } from "@/components/icons";
 import {
   Form,
   FormControl,
@@ -31,16 +23,39 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { showToast } from "@/lib/toast";
+import { CollegeType } from "@/types";
+import { collegeFormSchema } from "@/validations/collge";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTheme } from "next-themes";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { z } from "zod";
 
 const CollgePage = () => {
   const [isPending, startTransition] = React.useTransition();
+  const [colleges, setColleges] = useState<CollegeType[]>([]);
+  const [isRefetchData, setIsRefetchData] = useState<boolean>(false);
   const { theme } = useTheme();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getColleges = async () => {
+      const data = await GetAllColleges();
+      console.log("the collleges: ", data);
+      setColleges(data);
+    };
+
+    getColleges();
+  }, [isRefetchData]);
 
   const form = useForm<z.infer<typeof collegeFormSchema>>({
     resolver: zodResolver(collegeFormSchema),
     defaultValues: {
       collegeFullName: "",
-      collegeShortName: "",
+      collegeAcronym: "",
     },
   });
 
@@ -49,7 +64,7 @@ const CollgePage = () => {
       try {
         const message = await AddOrEditCollege({
           collegeFullName: formData.collegeFullName,
-          collegeShortName: formData.collegeShortName,
+          collegeAcronym: formData.collegeAcronym.toLowerCase(),
         });
 
         switch (message) {
@@ -70,6 +85,8 @@ const CollgePage = () => {
               theme: theme,
             });
 
+            setIsModalOpen(false);
+            setIsRefetchData(() => !isRefetchData);
             form.reset();
             break;
 
@@ -96,10 +113,11 @@ const CollgePage = () => {
         <div>
           <SubHeading content="Cadet Colleges" />
         </div>
+
         <div>
-          <Dialog>
+          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
             <DialogTrigger asChild>
-              <Button variant="default">
+              <Button variant="default" onClick={() => setIsModalOpen(true)}>
                 Add College <BsFillPlusCircleFill className="ml-3" size={20} />
               </Button>
             </DialogTrigger>
@@ -140,11 +158,11 @@ const CollgePage = () => {
                     <div>
                       <FormField
                         control={form.control}
-                        name="collegeShortName"
+                        name="collegeAcronym"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              College Short Name{" "}
+                              College Acronym
                               <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
@@ -156,8 +174,12 @@ const CollgePage = () => {
                       />
                     </div>
                     <DialogFooter className="flex sm:justify-between md:justify-between lg:justify-between gap-3">
-                      <DialogClose asChild className="">
-                        <Button type="button" variant="secondary">
+                      <DialogClose asChild>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          onClick={() => setIsModalOpen(false)}
+                        >
                           Close
                         </Button>
                       </DialogClose>
@@ -182,6 +204,10 @@ const CollgePage = () => {
             </DialogContent>
           </Dialog>
         </div>
+      </div>
+
+      <div className="container mx-auto py-10">
+        <DataTable columns={columns} data={colleges} />;
       </div>
     </div>
   );

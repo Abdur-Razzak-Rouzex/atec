@@ -127,4 +127,6 @@
   text-align: center;
 }
 
-
+.Toastify__toast-container {
+  z-index: 999999 !important;
+}

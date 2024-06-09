@@ -66,11 +66,6 @@ export interface InputType {
   email?: string;
 }
 
-export interface CollegeType {
-  title: string;
-  value: string;
-}
-
 type User = {
   id: 1;
   firstname: string;
@@ -88,4 +83,10 @@ type Post = {
   category: string;
   updatedAt: 1;
   userId: string;
+};
+
+export type CollegeType = {
+  id?: string;
+  collegeFullName: string;
+  collegeAcronym: string;
 };

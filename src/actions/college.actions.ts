@@ -3,18 +3,12 @@
 import { connectToDatabase } from "@/database";
 import College from "@/database/models/college.model";
 import { handleError } from "@/lib/utils";
-
-export type AddOrEditCollegeParams = {
-  collegeFullName: string;
-  collegeShortName: string;
-};
+import { CollegeType } from "@/types";
 
 export const AddOrEditCollege = async ({
   collegeFullName,
-  collegeShortName,
-}: AddOrEditCollegeParams): Promise<
-  "invalid-input" | "exists" | "error" | "success"
-> => {
+  collegeAcronym,
+}: CollegeType): Promise<"invalid-input" | "exists" | "error" | "success"> => {
   try {
     await connectToDatabase();
 
@@ -22,21 +16,37 @@ export const AddOrEditCollege = async ({
       $or: [
         {
           collegeFullName: collegeFullName,
-          collegeShortName: collegeShortName,
+          collegeAcronym: collegeAcronym,
         },
       ],
     });
-
 
     if (college) return "exists";
 
     const newCollege = await College.create({
       collegeFullName: collegeFullName,
-      collegeShortName: collegeShortName,
+      collegeAcronym: collegeAcronym,
     });
     return newCollege ? "success" : "error";
   } catch (error) {
     handleError("Error Adding College: ", error);
     return "error";
+  }
+};
+
+export const GetAllColleges = async (): Promise<CollegeType[]> => {
+  try {
+    await connectToDatabase();
+
+    const colleges = await College.find().lean();
+
+    return colleges.map((college: any) => ({
+      id: college._id.toString(),
+      collegeFullName: college.collegeFullName,
+      collegeAcronym: college.collegeAcronym,
+    })) as CollegeType[];
+  } catch (error) {
+    handleError("Error Adding College: ", error);
+    return [];
   }
 };

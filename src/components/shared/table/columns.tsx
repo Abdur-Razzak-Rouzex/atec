@@ -10,12 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Post } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { DataTableColumnHeader } from "./data-table";
 
-export const columns: ColumnDef<Post>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -39,29 +38,15 @@ export const columns: ColumnDef<Post>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "userId",
+    accessorKey: "collegeFullName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="UserId" />
+      <DataTableColumnHeader column={column} title="College Full Name" />
     ),
   },
   {
-    accessorKey: "status",
+    accessorKey: "collegeAcronym",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
-  },
-
-  {
-    accessorKey: "title",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
-    ),
-  },
-
-  {
-    accessorKey: "publishedAt",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="PublishedAt" />
+      <DataTableColumnHeader column={column} title=" College Acronym" />
     ),
   },
 
@@ -82,14 +67,9 @@ export const columns: ColumnDef<Post>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(post.id)}
-              >
-                Copy post
-              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>View post</DropdownMenuItem>
-              <DropdownMenuItem>View post details</DropdownMenuItem>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem>Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -9,7 +9,7 @@ const CollegeSchema = new Schema(
       unique: true,
     },
 
-    collegeShortName: {
+    collegeAcronym: {
       type: String,
       required: [true, "Colleg Short Name is required"],
       min: [3, "Colleg Short Name must be at least 3 characters long"],

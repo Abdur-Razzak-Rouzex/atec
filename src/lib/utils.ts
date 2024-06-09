@@ -25,3 +25,11 @@ export const sessionOptions: SessionOptions = {
     secure: process.env.NODE_ENV === "production",
   },
 };
+
+export const convertDocToObj = (doc: any) => {
+  doc._id = doc?._id.toString();
+  doc.createdAt = doc?.createdAt.toString();
+  doc.updatedAt = doc?.updatedAt.toString();
+
+  return doc;
+};
