@@ -46,7 +46,6 @@ const CollgePage = () => {
 
   function onSubmit(formData: z.infer<typeof collegeFormSchema>): void {
     startTransition(async () => {
-      console.log("first call");
       try {
         const message = await AddOrEditCollege({
           collegeFullName: formData.collegeFullName,

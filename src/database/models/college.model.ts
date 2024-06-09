@@ -21,6 +21,6 @@ const CollegeSchema = new Schema(
   }
 );
 
-const College = models?.User || model("College", CollegeSchema);
+const College = models?.College || model("College", CollegeSchema);
 
 export default College;

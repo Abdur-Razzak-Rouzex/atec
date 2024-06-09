@@ -6,7 +6,7 @@ const HouseSchema = new Schema(
     houseFullName: {
       type: String,
       required: [true, "House Full Name is required"],
-      minlength: [8, "House Full name must be at least 8 characters long"],
+      minlength: [6, "House Full name must be at least 8 characters long"],
     },
 
     houseShortName: {
@@ -25,6 +25,6 @@ const HouseSchema = new Schema(
   }
 );
 
-const House = models?.User || model("House", HouseSchema);
+const House = models?.House || model("House", HouseSchema);
 
 export default House;

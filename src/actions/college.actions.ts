@@ -15,7 +15,6 @@ export const AddOrEditCollege = async ({
 }: AddOrEditCollegeParams): Promise<
   "invalid-input" | "exists" | "error" | "success"
 > => {
-  console.log("second call");
   try {
     await connectToDatabase();
 
@@ -28,7 +27,6 @@ export const AddOrEditCollege = async ({
       ],
     });
 
-    console.log("the college: ", college);
 
     if (college) return "exists";
 
@@ -36,8 +34,6 @@ export const AddOrEditCollege = async ({
       collegeFullName: collegeFullName,
       collegeShortName: collegeShortName,
     });
-
-    console.log("final call");
     return newCollege ? "success" : "error";
   } catch (error) {
     handleError("Error Adding College: ", error);
